@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Libripolis.Models.Borrow>
+
+@{
+    ViewData["Title"] = "All Borrows";
+}
+
+<h1>All Borrows</h1>
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Book.Title)</th>
+                <th>@Html.DisplayNameFor(model => model.user.Email)</th>
+                <th>@Html.DisplayNameFor(model => model.Start)</th>
+                <th>@Html.DisplayNameFor(model => model.End)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Book.Title)</td>
+                    <td>@Html.DisplayFor(modelItem => item.user.Email)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Start)</td>
+                    <td>@Html.DisplayFor(modelItem => item.End)</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

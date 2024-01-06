@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Libripolis.Models.Book>
+
+@{
+    ViewData["Title"] = "Books";
+}
+
+<div class="container text-center mt-5">
+    <h1>Books</h1>
+
+    <p>
+        <a class="btn btn-primary" asp-action="Create">Add a Book</a>
+    </p>
+
+    <form id="search-form" class="form-inline" asp-controller="Books" asp-action="Index" method="get">
+        <div class="form-group">
+            <label for="SearchString" class="sr-only">Title:</label>
+            <input type="text" class="form-control" id="SearchString" name="SearchString" placeholder="Title">
+        </div>
+        <button type="submit" class="btn btn-primary">Filter</button>
+    </form>
+
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>@Html.DisplayNameFor(model => model.Title)</th>
+                <th>@Html.DisplayNameFor(model => model.Author)</th>
+                <th>Pages</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.ImageUrl))
+                        {
+                            <img src="@item.ImageUrl" alt="Book Image" width="85" height="115">
+                        }
+                        else
+                        {
+                            <span>No Image Available</span>
+                        }
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Author)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Pages)</td>
+                    <td>
+                        <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                        <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
